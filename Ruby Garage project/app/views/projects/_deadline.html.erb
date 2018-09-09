@@ -1,0 +1,8 @@
+<div id="deadline-task-<%= object.id %>" data-deadline="<%= object.deadline %>" class="deadline <% if !object.deadline.nil?
+                          if object.deadline < 2.hours.from_now %>
+                                  deadline-violated
+                               <% end end %>">
+  <% if !object.deadline.nil? %>
+      deadline: <%= object.deadline %>
+  <% end %>
+</div>

@@ -1,0 +1,31 @@
+<tr id="task-<%= task.id %>" class="task">
+  <td class="status-cell col-md-1">
+    <div class="checkbox-done text-center">
+      <input type="checkbox" class="task-complete-checkbox" name="task-complete-<%= task.id %>" value="<%= task.id %>" <% if task.status == 1 %> checked <% end  %> >
+    </div>
+  </td>
+
+  <td class="status-cell-divider"></td>
+
+  <td class="col-md-9 task-cell">
+    <span class="task-name" id="task-name-<%= task.id %>" data-id="<%= task.id %>"><%= task.name %></span>
+    <%= render 'projects/deadline', object: task if !task.deadline.nil? %>
+  </td>
+
+  <td class="col-md-2 text-center">
+    <div class="task-controls">
+      <span class="badge priority" id="task-priority-<%= task.id %>"><%= task.priority %></span>
+      <%= link_to '#', data: {toggle: "modal", target: "#priorityModal", actiontarget: task.id} do %>
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+      <% end %>
+      |
+      <%= link_to '#', data: {toggle: "modal", target: "#editTaskModal", actiontarget: task.id} do %>
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      <% end %>
+      |
+      <%= link_to task_path(task), method: :delete, remote: true, data: {actiontarget: task.id, actiontargetparent: task.project.id, type: 'text'}, class: 'task-delete-link' do %>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      <% end %>
+    </div>
+  </td>
+</tr>
